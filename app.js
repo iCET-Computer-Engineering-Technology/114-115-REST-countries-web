@@ -1,14 +1,21 @@
 console.log("JS");
 
+let countriesArrayList = [];
+
+let index = 0;
+
 function loadCountries(){
     let countriesList = document.getElementById("countriesList");
+ 
     let body = "";
+    
     fetch("https://restcountries.com/v3.1/all")
     .then(res=>res.json())
     .then(dataList=>{
+        countriesArrayList=dataList;
         dataList.forEach(element => {
             body+=`
-                               <div class="col">
+                               <div class="col" id="${index++}">
                         <div class="card shadow-sm">
                             <img src="${element.flags.png}" alt="">
                             <div class="card-body">
@@ -17,8 +24,7 @@ function loadCountries(){
                                     additional content. This content is a little bit longer.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                       <button type="button" onclick="loadModalData()" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">View More-></button>
                                     </div>
                                     <small class="text-body-secondary">9 mins</small>
                                 </div>
@@ -26,11 +32,20 @@ function loadCountries(){
                         </div>
                     </div>
             `
-            
         });
 
         countriesList.innerHTML=body;
     })
+}
+
+
+function loadModalData(){
+    // console.log("modal");
+    // let modalBody = document.getElementById("modal-body");
+    // console.log(modalBody);
+    console.log(countriesArrayList);
+    alert(index);
+  
 }
 
 
