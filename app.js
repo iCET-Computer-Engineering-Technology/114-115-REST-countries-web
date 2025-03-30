@@ -1,22 +1,18 @@
-console.log("JS");
-
 let countriesArrayList = [];
 
-let index = 0;
-
-function loadCountries(){
+function loadCountries() {
     let countriesList = document.getElementById("countriesList");
- 
+
     let body = "";
-    
+
     fetch("https://restcountries.com/v3.1/all")
-    .then(res=>res.json())
-    .then(dataList=>{
-        countriesArrayList=dataList;
-        loadModalData();
-        dataList.forEach((element,index) => {
-            
-            body+=`
+        .then(res => res.json())
+        .then(dataList => {
+            countriesArrayList = dataList;
+            loadModalData();
+            dataList.forEach((element, index) => {
+
+                body += `
                                <div class="col">
                         <div class="card shadow-sm">
                             <img src="${element.flags.png}" alt="">
@@ -35,40 +31,43 @@ function loadCountries(){
                         </div>
                     </div>
                         <!-- Modal -->
-
             `
-        });
+            });
 
-
-
-        countriesList.innerHTML=body;
-    })
+            countriesList.innerHTML = body;
+        })
 }
 
 
-async function loadModalData(index){
-    // console.log("modal");
+async function loadModalData(index) {
     let modalBody = document.getElementById("modal-body");
-    // console.log(modalBody);
-
     console.log(countriesArrayList[index]);
 
-    modalBody.innerHTML = `<img src="${countriesArrayList[index].flags.png}" alt="">`
-
+    modalBody.innerHTML = `
+    
   
+    <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <img src="${countriesArrayList[index].flags.png}" alt="">
+    <h5 class="card-title">${countriesArrayList[index].name.official}</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+    `
 }
 
 
-function search(){
+function search() {
     let searchTxt = document.getElementById("txtSearch").value;
     console.log(searchTxt);
-    fetch(`https://restcountries.com/v3.1/name/${searchTxt}`).then(res=>res.json())
-    .then(data=>{
-        console.log(data);
-    })
-    
+    fetch(`https://restcountries.com/v3.1/name/${searchTxt}`).then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
 }
-
 
 loadCountries();
 
