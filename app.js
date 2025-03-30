@@ -24,13 +24,15 @@ function loadCountries(){
                                     additional content. This content is a little bit longer.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                       <button type="button" onclick="loadModalData()" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">View More-></button>
+                                       <button type="button" onclick="loadModalData()" class="btn btn-warning show-more" data-bs-toggle="modal" data-bs-target="#exampleModal">View More-></button>
                                     </div>
                                     <small class="text-body-secondary">9 mins</small>
                                 </div>
                             </div>
                         </div>
                     </div>
+                        <!-- Modal -->
+
             `
         });
 
@@ -45,8 +47,29 @@ function loadModalData(){
     // console.log(modalBody);
     console.log(countriesArrayList);
     alert(index);
+    let log = document.querySelectorAll('.show-more');
+
+    console.log(log);
   
 }
 
 
+function search(){
+    let searchTxt = document.getElementById("txtSearch").value;
+    console.log(searchTxt);
+
+    fetch(`https://restcountries.com/v3.1/name/${searchTxt}`).then(res=>res.json())
+    .then(data=>{
+        console.log(data);
+        
+    })
+    
+}
+
+
 loadCountries();
+
+
+
+
+
